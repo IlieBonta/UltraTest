@@ -1,0 +1,3 @@
+# Project exclude paths
+/UltraTest/UltraTest/dist/
+/UltraTest/UltraTest/node_modules/
