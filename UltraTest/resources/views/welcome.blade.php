@@ -20,59 +20,73 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+                integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+                crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="resources/css/app.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+    <div
+        class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0">
+        @if (Route::has('login'))
+            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}"
+                           class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
+        <div class="container-fluid">
+            <div>
                 <h1 class="text-center m-5">Products List</h1>
-
-                <div class="row row-cols-1 m-auto mt-5 row-cols-md-3 mb-3 text-center">
-                    @foreach($products as $productItem)
-                        <div class="col">
-                            <div class="card mb-4 rounded-3 shadow-sm">
-                                <div class="card-header py-3">
-                                    <h4 class="my-0 fw-normal">{{$productItem->name}}</h4>
-                                </div>
-                                <div class="card-body">
-                                    <h1 class="card-title pricing-card-title">{{$productItem->price}}$</h1>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li>{{$productItem->description}}</li>
-                                        <li><small>{{$productItem->created_at}}</small></li>
-                                    </ul>
-                                    <div class="d-flex justify-content-around">
-                                        <a href="{{--{{ route('one-product',$productItem->id) }}--}}">
-                                            <button type="button" class="w-80 btn btn-lg btn-primary ">Take a look</button>
-                                        </a>
-                                        <a href="{{--{{ route('edit-product',$productItem->id) }}--}}">
-                                            <button type="button" class="w-20 btn btn-lg btn-success btn-primary">Edit</button>
-                                        </a>
-                                        <a href="{{--{{ route('delete-product',$productItem->id) }}--}}">
-                                            <button type="button" class="w-20 btn btn-lg btn-danger btn-primary">Delete</button>
-                                        </a>
-                                    </div>
+            </div>
+            <div class="row row-cols-1 m-auto mt-5 row-cols-md-3 mb-3 text-center">
+                @foreach($products as $productItem)
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <h4 class="my-0 fw-normal">{{$productItem->name}}</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">{{$productItem->price}}$</h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>{{$productItem->description}}</li>
+                                    <li><small>{{$productItem->created_at}}</small></li>
+                                </ul>
+                                <div class="d-flex justify-content-around">
+                                    <a href="{{--{{ route('one-product',$productItem->id) }}--}}">
+                                        <button type="button" class="w-80 btn btn-lg btn-primary ">Take a look</button>
+                                    </a>
+                                    <a href="{{--{{ route('edit-product',$productItem->id) }}--}}">
+                                        <button type="button" class="w-20 btn btn-lg btn-success btn-primary">Edit
+                                        </button>
+                                    </a>
+                                    <a href="{{--{{ route('delete-product',$productItem->id) }}--}}">
+                                        <button type="button" class="w-20 btn btn-lg btn-danger btn-primary">Delete
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-
-
-
-
+                    </div>
+                @endforeach
+            </div>
         </div>
+    </div>
     </body>
 </html>

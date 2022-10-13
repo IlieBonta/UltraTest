@@ -5,20 +5,22 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', static function () {
-    return view('homePage');
-});
-
-Route::get('/', static function () {
     return view('welcome');
 });
-Route::get('/products', function () {
+Route::get('/', static function () {
     $products = DB::table('Products')->get();
-    return view('products.welcome',compact('products'));
+    return view('welcome',compact('products'));})->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
