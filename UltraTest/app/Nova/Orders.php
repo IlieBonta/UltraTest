@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Select;
 
 class Orders extends Resource
 {
@@ -45,12 +46,22 @@ class Orders extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name')->sortable(),
-            Number::make('order_total_cost')->sortable(),
-            Number::make('basket'),
-            Text::make('payment_method'),
-            Text::make('delivery_method'),
-
+            Text::make('name')->sortable()->rules('required'),
+            Currency::make('order_total_cost')->sortable()->rules('required'),
+            Number::make('basket',function (){
+                return $this->basket. ' Items';
+            })->onlyOnIndex(),
+            Number::make('basket')->onlyOnForms()->rules('required'),
+            Select::make('payment_method')->options([
+                'Card Payment'=> 'Card Payment',
+                'Cash in hands'=> 'Cash in hands',
+                'Transfer'=>  'Transfer',
+            ])->rules('required'),
+            Select::make('delivery_method')->sortable()->options([
+                'NovaPosta'=> 'NovaPosta',
+                'Pickup'=> 'Pickup',
+                'Delivery in Chisinau'=> 'Delivery in Chisinau',
+            ])->rules('required'),
         ];
     }
 

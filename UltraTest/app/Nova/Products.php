@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Image;
 
 class Products extends Resource
 {
@@ -52,11 +54,20 @@ class Products extends Resource
             ID::make()->sortable(),
             Text::make('name')->sortable()->rules('required'),
             Textarea::make('description')->sortable(),
-            Currency::make('price')->sortable()->onlyOnIndex(),
+            Image::make('image')->rounded()->disk('public')->maxWidth(50),
+            Currency::make('price')->sortable()->onlyOnIndex()->onlyOnDetail(),
             Number::make('price')->onlyOnForms()->rules('required'),
             Text::make('brand')->sortable()->rules('required'),
-            Number::make('items_in_store')->sortable()->rules('required'),
-            Number::make('active/no')->sortable()->rules('required'),
+            Number::make('items_in_store',function (){
+                return $this->items_in_store. ' Items';
+            })->onlyOnIndex(),
+            Number::make('items_in_store')->onlyOnForms()->rules('required'),
+
+
+            Select::make('active/no')->sortable()->rules('required')->options([
+                'no_active'=>'no_active',
+                'active'=>'active',
+            ]),
         ];
     }
 

@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', static function () {
+/*Route::get('/', static function () {
     return view('welcome');
-});
+});*/
 Route::get('/', static function () {
     $products = DB::table('Products')->get();
-    return view('welcome',compact('products'));})->name('home');
+    return view('welcome', compact('products'));
+})->name('home');
 
 Auth::routes();
 
@@ -23,4 +24,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+});
+
+Route::get('/basket', static function () {
+    return view('basket');
+})->name('basket');
+
+Route::post('/form/submit', static function () {
+    return "all done";
 });

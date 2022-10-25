@@ -9,6 +9,8 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+/*use Laravel\Nova\Fields\HasMany;*/
+
 
 class User extends Resource
 {
@@ -44,6 +46,8 @@ class User extends Resource
     public function fields(NovaRequest $request)
     {
         return [
+
+  /*          HasMany::make('Orders'),*/
             ID::make()->sortable(),
 
             Gravatar::make()->maxWidth(50),

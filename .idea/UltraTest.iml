@@ -133,6 +133,8 @@
       <excludeFolder url="file://$MODULE_DIR$/UltraTest/vendor/pragmarx/google2fa" />
       <excludeFolder url="file://$MODULE_DIR$/UltraTest/vendor/paragonie/constant_time_encoding" />
       <excludeFolder url="file://$MODULE_DIR$/UltraTest/vendor/bacon/bacon-qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/UltraTest/vendor/barryvdh/laravel-debugbar" />
+      <excludeFolder url="file://$MODULE_DIR$/UltraTest/vendor/maximebf/debugbar" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
